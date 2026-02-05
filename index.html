@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Essy Gwimi 💗</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffd6e8, #fff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #333;
+      text-align: center;
+    }
+
+    .card {
+      background: white;
+      padding: 30px 25px;
+      border-radius: 20px;
+      max-width: 400px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease;
+    }
+
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1em;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .question {
+      font-size: 1.3em;
+      font-weight: bold;
+      margin: 25px 0;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .yes {
+      background-color: #ff4d88;
+      color: white;
+    }
+
+    .obviously {
+      background-color: #ffe3ec;
+      color: #ff4d88;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="main">
+    <h1>Essy Gwimi 💗</h1>
+    <p>
+      I tried to act normal…<br>
+      but I actually enjoy talking to you way too much 😅<br><br>
+      You’re cute, your energy is unmatched,<br>
+      and you’ve lowkey been living rent-free in my head.
+    </p>
+
+    <div class="question">
+      Will you be my Valentine? 💘
+    </div>
+
+    <div class="buttons">
+      <button class="yes" onclick="showYes()">Yes 💖</button>
+      <button class="obviously" onclick="showYes()">Obviously 😌</button>
+    </div>
+
+    <p style="font-size: 0.8em; margin-top: 15px;">
+      (This is me being brave btw)
+    </p>
+  </div>
+
+  <div class="card hidden" id="yes">
+    <h1>Yayyyy 🥹💘</h1>
+    <p>
+      I knew you had taste.<br>
+      You just made my Valentine’s Day way better.
+    </p>
+    <p style="font-size: 0.9em;">
+      Now I owe you snacks and good vibes 😌
+    </p>
+  </div>
+
+  <script>
+    function showYes() {
+      document.getElementById("main").classList.add("hidden");
+      document.getElementById("yes").classList.remove("hidden");
+    }
+  </script>
+
+</body>
+</html>
