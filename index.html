@@ -73,6 +73,12 @@
     .hidden {
       display: none;
     }
+
+    .tooltip {
+      font-size: 0.9em;
+      color: #ff4d6d;
+      margin-top: 5px;
+    }
   </style>
 </head>
 
@@ -90,6 +96,7 @@
     <div id="buttons">
       <button id="yesBtn">YES 💖</button>
       <button id="noBtn">NO 😭</button>
+      <p class="tooltip" id="noMessage"></p>
     </div>
   </div>
 
@@ -115,15 +122,30 @@
     }
     typeText();
 
-    // NO BUTTON RUNS AWAY
+    // NO BUTTON INTERACTIVE
     const noBtn = document.getElementById("noBtn");
+    const noMsg = document.getElementById("noMessage");
     let noScale = 1;
+    let noTapCount = 0;
 
     noBtn.addEventListener("click", () => {
+      noTapCount++;
       noScale -= 0.15;
-      noBtn.style.transform = `scale(${noScale}) translate(${Math.random()*100 - 50}px, ${Math.random()*100 - 50}px)`;
-      if (noScale <= 0.3) {
-        noBtn.classList.add("hidden");
+      noBtn.style.transform = `scale(${noScale})`;
+
+      // SHOW MESSAGES BASED ON TAP COUNT
+      if(noTapCount === 1) noMsg.textContent = "Are you sure? 🥺";
+      else if(noTapCount === 2) noMsg.textContent = "Really? 😭";
+      else if(noTapCount === 3) noMsg.textContent = "Do you even like me? 💔";
+
+      // VIBRATION 3 SECONDS
+      if (navigator.vibrate) navigator.vibrate(3000);
+
+      // FINAL TAP -> RUN AWAY
+      if(noTapCount >= 4){
+        noBtn.style.transition = "all 0.5s ease";
+        noBtn.style.transform = `translate(${Math.random()*200-100}px, ${Math.random()*200-100}px) scale(0.1)`;
+        setTimeout(()=>{ noBtn.classList.add("hidden"); noMsg.textContent=""; }, 500);
       }
     });
 
