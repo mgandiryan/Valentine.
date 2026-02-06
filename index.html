@@ -1,52 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Essy Gwimi 💗</title>
+  <meta charset="UTF-8">
+  <title>Will You Be My Valentine? 💘</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #ffd6e8, #fff);
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding: 0;
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       height: 100vh;
-      color: #333;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
     }
 
-    .card {
-      background: white;
-      padding: 30px 25px;
+    .container {
+      background: rgba(255,255,255,0.85);
+      padding: 25px;
       border-radius: 20px;
-      max-width: 400px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      animation: fadeIn 1s ease;
+      max-width: 350px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
 
     h1 {
-      font-size: 1.8em;
+      font-size: 1.4em;
       margin-bottom: 10px;
     }
 
     p {
       font-size: 1em;
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
-
-    .question {
-      font-size: 1.3em;
-      font-weight: bold;
-      margin: 25px 0;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
+      min-height: 60px;
     }
 
     button {
@@ -55,73 +43,115 @@
       border: none;
       border-radius: 30px;
       cursor: pointer;
-      transition: transform 0.2s ease;
+      margin: 10px;
+      transition: all 0.3s ease;
     }
 
-    button:hover {
-      transform: scale(1.05);
-    }
-
-    .yes {
-      background-color: #ff4d88;
+    #yesBtn {
+      background: #ff4d6d;
       color: white;
     }
 
-    .obviously {
-      background-color: #ffe3ec;
-      color: #ff4d88;
+    #noBtn {
+      background: #999;
+      color: white;
+      position: relative;
+    }
+
+    .heart {
+      position: fixed;
+      color: red;
+      font-size: 20px;
+      animation: fall 4s linear infinite;
+    }
+
+    @keyframes fall {
+      from { transform: translateY(-10vh); }
+      to { transform: translateY(110vh); }
     }
 
     .hidden {
       display: none;
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
   </style>
 </head>
+
 <body>
 
-  <div class="card" id="main">
-    <h1>Essy Gwimi 💗</h1>
-    <p>
-      I tried to act normal…<br>
-      but I actually enjoy talking to you way too much 😅<br><br>
-      You’re cute, your energy is unmatched,<br>
-      and you’ve lowkey been living rent-free in my head.
-    </p>
+  <!-- Background Music -->
+  <audio id="bg-music" loop>
+    <source src="Valentine.mp3" type="audio/mpeg">
+  </audio>
 
-    <div class="question">
-      Will you be my Valentine? 💘
+  <div class="container" id="mainBox">
+    <h1>Hey Essie Kunmi 💕</h1>
+    <p id="typing"></p>
+
+    <div id="buttons">
+      <button id="yesBtn">YES 💖</button>
+      <button id="noBtn">NO 😭</button>
     </div>
-
-    <div class="buttons">
-      <button class="yes" onclick="showYes()">Yes 💖</button>
-      <button class="obviously" onclick="showYes()">Obviously 😌</button>
-    </div>
-
-    <p style="font-size: 0.8em; margin-top: 15px;">
-      (This is me being brave btw)
-    </p>
-  </div>
-
-  <div class="card hidden" id="yes">
-    <h1>Yayyyy 🥹💘</h1>
-    <p>
-      I knew you had taste.<br>
-      You just made my Valentine’s Day way better.
-    </p>
-    <p style="font-size: 0.9em;">
-      Now I owe you snacks and good vibes 😌
-    </p>
   </div>
 
   <script>
-    function showYes() {
-      document.getElementById("main").classList.add("hidden");
-      document.getElementById("yes").classList.remove("hidden");
+    // MUSIC (mobile tap)
+    document.addEventListener("click", () => {
+      const music = document.getElementById("bg-music");
+      music.volume = 0.4;
+      music.play().catch(()=>{});
+    });
+
+    // TYPING TEXT
+    const text = "Essie Kunmi, the love of my life… will you please be my Valentine? 💘";
+    let i = 0;
+    const typingEl = document.getElementById("typing");
+
+    function typeText() {
+      if (i < text.length) {
+        typingEl.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeText, 60);
+      }
+    }
+    typeText();
+
+    // NO BUTTON RUNS AWAY
+    const noBtn = document.getElementById("noBtn");
+    let noScale = 1;
+
+    noBtn.addEventListener("click", () => {
+      noScale -= 0.15;
+      noBtn.style.transform = `scale(${noScale}) translate(${Math.random()*100 - 50}px, ${Math.random()*100 - 50}px)`;
+      if (noScale <= 0.3) {
+        noBtn.classList.add("hidden");
+      }
+    });
+
+    // YES BUTTON MAGIC
+    const yesBtn = document.getElementById("yesBtn");
+
+    yesBtn.addEventListener("click", () => {
+      document.getElementById("mainBox").innerHTML = `
+        <h1>YEAH BABY 😭❤️</h1>
+        <p>It’s us against the world 💍💘</p>
+      `;
+      startHearts();
+    });
+
+    // HEART RAIN
+    function startHearts() {
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 20 + 15 + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 4000);
+      }, 300);
     }
   </script>
 
